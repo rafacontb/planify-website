@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Planify</title>
+  <link rel="icon" href="favicon.ico" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    .footer {
+      background-color: #002C5F;
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 14px;
+    }
+
+    .social-icons {
+      margin-top: 10px;
+    }
+
+    .social-icons a {
+      margin: 0 10px;
+      display: inline-block;
+    }
+
+    .social-icons img {
+      width: 24px;
+      height: 24px;
+    }
+
+    .copyright {
+      margin-top: 15px;
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    .top-banner {
+      background-color: #9CF0F3;
+      color: #000;
+      text-align: center;
+      padding: 10px;
+      font-size: 14px;
+    }
+
+    .nav-bar {
+      background-color: #002C5F;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 32px;
+      font-weight: bold;
+    }
+
+    .menu-button {
+      background-color: transparent;
+      color: white;
+      border: 2px solid white;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dropdown {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      right: 20px;
+      top: 60px;
+      background-color: #002C5F;
+      border-radius: 6px;
+      overflow: hidden;
+      z-index: 100;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+    }
+
+    .dropdown.show {
+      display: flex;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .dropdown a {
+      padding: 12px 20px;
+      color: white;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .dropdown a:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Outfit', sans-serif;
+      background-color: #f5f5f5;
+      color: #000;
+    }
+
+    .hero {
+      background-color: #e9eef5;
+      text-align: center;
+      padding: 0;
+    }
+
+    .download-section {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      background-color: white;
+      padding: 100px 5vw;
+      gap: 100px;
+      min-height: 600px;
+    }
+
+    .store-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .store-buttons img {
+      width: 200px;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .slogan-section {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      background-color: #e9eef5;
+      padding: 60px 5vw;
+      gap: 100px;
+    }
+
+    .slogan-text {
+      flex: 1;
+      min-width: 280px;
+      max-width: 500px;
+      text-align: center;
+      padding-right: 20px;
+    }
+
+    .phone-video {
+      flex: 1;
+      max-width: 320px;
+      width: 100%;
+    }
+
+    .phone-frame {
+      position: relative;
+      width: 100%;
+      max-width: 280px;
+      aspect-ratio: 9 / 18;
+      border-radius: 50px;
+      background-color: #111;
+      padding: 16px;
+      box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.1), 0 12px 25px rgba(0, 0, 0, 0.4);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .phone-frame::before {
+      content: "";
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 28px;
+      background-color: #000;
+      border-radius: 14px;
+      z-index: 10;
+    }
+
+    .phone-frame video {
+      width: 100%;
+      height: 100%;
+      border-radius: 40px;
+      object-fit: cover;
+      z-index: 1;
+    }
+
+    @media (max-width: 768px) {
+      .slogan-section,
+      .download-section {
+        flex-direction: column;
+      }
+
+      .slogan-text,
+      .phone-video {
+        max-width: 100%;
+      }
+
+      .store-buttons {
+        flex-direction: column;
+        gap: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-banner">
+    Obtén un descuento con el código "PLANIFY25"
+  </div>
+
+  <div class="nav-bar">
+    <div class="logo">Planify</div>
+    <button class="menu-button" id="menuBtn" onclick="toggleMenu()">
+      <span class="menu-icon" id="menuIcon">☰</span> <span id="menuText">MENÚ</span>
+    </button>
+    <div class="dropdown" id="menuDropdown">
+      <a href="index.html">Inicio</a>
+      <a href="mision.html">Misión</a>
+      <a href="vision.html">Visión</a>
+      <a href="contacto.html">Contacto</a>
+      <a href="pagina1.html">Motivos</a>
+      <a href="pagina2.html">Modelo de Negocios</a>
+      <a href="pagina3.html">Aliados Globales de Planify</a>
+      <a href="necesidadestudiantil.html">Necesidad Estudiantil</a>
+      <a href="psicedu.html">La Psicología de la Educación</a>
+
+
+    </div>
+  </div>
+
+  <div class="hero">
+    <img src="phone_mockup.png" alt="App preview" style="width: 100%; height: auto; display: block;">
+  </div>
+
+  <div class="download-section">
+    <div style="max-width: 400px; width: 100%;">
+      <img src="qr_code.png" alt="QR Code" style="width: 100%;">
+    </div>
+    <div style="text-align: center; max-width: 300px;">
+      <h2 style="font-size: 28px; margin-bottom: 25px;">DESCÁRGALA AHORA</h2>
+
+      <div class="store-buttons" style="margin-bottom: 20px;">
+        <img src="google_play.png" alt="Google Play">
+        <img src="app_store.png" alt="App Store">
+      </div>
+
+      <p style="font-size: 16px; color: #444;">
+        Escanea el código QR o descarga la app desde tu tienda favorita.
+      </p>
+    </div>
+  </div>
+
+  <div class="slogan-section">
+    <div class="slogan-text">
+      <h2 style="font-size: 24px; margin-bottom: 15px;">Organiza tu vida sin complicaciones</h2>
+      <p style="font-size: 16px;">Planify te ayuda a organizar tus tareas y rutinas diarias de manera rápida, sencilla y eficiente. Disponible ahora para Android y iOS.</p>
+    </div>
+    <div class="phone-video">
+      <div class="phone-frame">
+        <video src="planify_demo.mp4" controls muted autoplay loop></video>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div>SÍGUENOS</div>
+    <div class="social-icons">
+      <a href="https://www.instagram.com/byplanify?igsh=MTFneGhwYWljOHhydw%3D%3D&utm_source=qr" target="_blank"><img src="instagram_icon.png" alt="Instagram"></a>
+      <a href="#"><img src="facebook_icon.png" alt="Facebook"></a>
+      <a href="#"><img src="twitter_icon.png" alt="Twitter"></a>
+    </div>
+    <div class="copyright">
+      © 2025 Planify®. Todos los derechos reservados.
+    </div>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      const dropdown = document.getElementById('menuDropdown');
+      const btnText = document.getElementById('menuText');
+      const icon = document.getElementById('menuIcon');
+      const isOpen = dropdown.classList.contains('show');
+
+      dropdown.classList.toggle('show');
+      btnText.textContent = isOpen ? 'MENÚ' : 'CERRAR';
+      icon.textContent = isOpen ? '☰' : '✖';
+    }
+
+    document.querySelectorAll('#menuDropdown a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('menuDropdown').classList.remove('show');
+        document.getElementById('menuText').textContent = 'MENÚ';
+        document.getElementById('menuIcon').textContent = '☰';
+      });
+    });
+  </script>
+</body>
+</html>
+
